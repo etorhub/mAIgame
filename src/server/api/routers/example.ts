@@ -11,10 +11,7 @@ export const exampleRouter = createTRPCRouter({
     .input(z.object({ text: z.string() }))
     .mutation(async ({ input }) => {
       const something = await inWorldClient.sayHello(input);
-      console.log("message?!", something.text.text);
-      return {
-        greeting: something.text.text,
-      };
+      return something;
     }),
 
   getAll: publicProcedure.query(({ ctx }) => {
