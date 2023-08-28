@@ -1,9 +1,19 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import Link from "next/link";
+import { useState } from "react";
 import { api } from "~/utils/api";
 
 export default function Home() {
+  const [question, setQuestion] = useState("");
+  const [answer, setAnswer] = useState("");
+  const { mutate, data, isLoading, error } = api.example.hello.useMutation();
+
+  const onSubmit = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    await mutate({ text: "World" });
+  };
+
   return (
     <>
       <Head>
@@ -20,6 +30,27 @@ export default function Home() {
           <div className="flex flex-col items-center gap-2">
             <p className="text-2xl text-white"></p>
             <AuthShowcase />
+          </div>
+          {/* ADD A text box and a submit button consistent with the design above */}
+          <div className="flex flex-col items-center gap-2">
+            <p className="text-2xl text-white">Submit a question</p>
+            <input
+              className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
+              type="text"
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+              placeholder="Question"
+            />
+            <button
+              className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
+              type="submit"
+              onClick={onSubmit}
+            >
+              Submit
+            </button>
+            {isLoading && <p>Loading...</p>}
+            {error && <p>{error.message}</p>}
+            {data && <p>{data.greeting}</p>}
           </div>
         </div>
       </main>

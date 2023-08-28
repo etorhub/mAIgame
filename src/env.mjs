@@ -25,6 +25,9 @@ export const env = createEnv({
     DISCORD_CLIENT_SECRET: z.string(),
     GITHUB_CLIENT_ID: z.string(),
     GITHUB_CLIENT_SECRET: z.string(),
+    INWORLD_KEY: z.string(),
+    INWORLD_SECRET: z.string(),
+    INWORLD_SCENE: z.string(),
   },
 
   /**
@@ -49,6 +52,9 @@ export const env = createEnv({
     DISCORD_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET,
     GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
     GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
+    INWORLD_KEY: process.env.INWORLD_KEY,
+    INWORLD_SECRET: process.env.INWORLD_SECRET,
+    INWORLD_SCENE: process.env.INWORLD_SCENE,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.

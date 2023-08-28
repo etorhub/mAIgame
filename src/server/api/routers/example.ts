@@ -4,13 +4,16 @@ import {
   publicProcedure,
   protectedProcedure,
 } from "~/server/api/trpc";
+import inWorldClient from "../services/inWorld";
 
 export const exampleRouter = createTRPCRouter({
   hello: publicProcedure
     .input(z.object({ text: z.string() }))
-    .query(({ input }) => {
+    .mutation(async ({ input }) => {
+      const something = await inWorldClient.sayHello(input);
+      console.log("message?!", something.text.text);
       return {
-        greeting: `Hello ${input.text}`,
+        greeting: something.text.text,
       };
     }),
 
